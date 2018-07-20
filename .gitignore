@@ -1,0 +1,17 @@
+.ansible
+.ansible_galaxy
+.atom
+.bash_history
+.cache
+.config
+.local
+.oh-my-zsh
+.vscode
+*.retry
+.zshrc
+.IdeaIC2017.1/
+.minikube
+.oracle_jre_usage
+provisoning.retry
+.gitconfig
+roles/galaxy

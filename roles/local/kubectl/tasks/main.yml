@@ -1,0 +1,24 @@
+- name: getting google cloud apt-key (downloading)
+  get_url:
+    url: 'https://packages.cloud.google.com/apt/doc/apt-key.gpg'
+    dest: '/tmp/apt-key.gpg'
+
+- name: getting google cloud apt-key (adding key)
+  shell: cd /tmp && apt-key add apt-key.gpg
+  become: yes
+
+- name: creating kubernetes.list file
+  file: 
+    path: /etc/apt/sources.list.d/kubernetes.list 
+    state: touch
+  become: yes
+
+- name: copying stardand input to kuerbentes.list file.
+  shell: echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
+  become: yes
+
+- name: installing kubectl
+  apt:
+    name: kubectl
+    state: latest
+    update_cache: yes

@@ -1,0 +1,8 @@
+java_6_install_file: jdk-6u45-linux-x64.bin
+java_6_installed_folder: jdk1.6.0_45
+
+java_7_install_file: jdk-7u80-linux-x64.tar.gz
+java_7_installed_folder: jdk1.7.0_80
+
+java_8_install_file: jdk-8u131-linux-x64.tar.gz
+java_8_installed_folder: jdk1.8.0_131

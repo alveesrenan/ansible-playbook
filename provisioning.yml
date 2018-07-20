@@ -1,0 +1,92 @@
+---
+  
+- hosts: localhost
+  become: yes
+  roles:
+
+    - role: local/vim
+
+    - role: local/java
+
+    - role: local/heroku
+
+    - role: local/aws
+
+    - role: local/gcloud
+
+    - role: local/kubectl
+
+    - role: local/minikube
+
+    - role: local/docker
+      ci_env: false
+      docker_users: "{{ username }}"
+      apt_docker_repository: https://download.docker.com/linux/ubuntu xenial stable
+    
+    - role: local/docker-compose
+      docker_compose_version: 1.15.0
+
+    - role: galaxy/maven
+      maven_is_default_installation: yes
+
+    - role: galaxy/maven-color
+
+    - role: galaxy/terminator
+
+    - role: galaxy/virtualbox
+    
+    - role: galaxy/oh-my-zsh
+      users:
+        - username: "{{ username }}"
+          oh_my_zsh:
+            theme: awesomepanda
+            plugins:
+              - git
+              - mvn
+              - docker
+              - bower
+              - npm
+              - ng
+              - pip
+              - sudo
+
+    - role: galaxy/nodejs
+      node_packages:
+        - n
+      node_version: 8.x
+
+    - role: galaxy/google-chrome
+
+    - role: galaxy/visual-studio-code
+      users:
+        - username: "{{ username }}"
+          visual_studio_code_extensions:
+            - alexkrechik.cucumberautocomplete
+            - PeterJausovec.vscode-docker
+            - EditorConfig.editorconfig
+            - stubailo.ignore-gitignore
+            - haaaad.ansible
+            - rbbit.typescript-hero
+            - robertohuertasm.vscode-icons
+
+    - role: galaxy/sublime-text
+
+    - role: galaxy/intellij
+      intellij_default_jdk_home: /usr/lib/jvm/java-8-oracle
+      intellij_edition: ultimate
+      users:
+        - username: "{{ username }}"
+          intellij_jdks:
+          - name: JDK_1.8
+            home: /usr/lib/jvm/java-8-oracle
+          - name: JDK_1.7
+            home: /usr/lib/jvm/java-7-oracle
+          - name: JDK_1.6
+            home: /usr/lib/jvm/java-6-oracle
+          intellij_default_jdk: JDK_1.8
+          intellij_disabled_plugins:
+            - Lombook+Plugin
+            - BashSupport
+            - mobi.hsz.idea.gitignore
+            - com.vladsch.idea.multimarkdown
+            - Batch+Scripts+Support

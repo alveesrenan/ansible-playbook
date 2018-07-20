@@ -1,0 +1,8 @@
+- include: java6.yml
+  become: yes
+
+- include: java7.yml
+  become: yes
+
+- include: java8.yml
+  become: yes

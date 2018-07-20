@@ -1,0 +1,10 @@
+- name: installing heroku cli dependencies
+  apt: 
+    name: apt-transport-https
+    state: latest
+    update_cache: yes
+  become: yes
+
+- name: installing heroku cli
+  shell: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+  become: yes

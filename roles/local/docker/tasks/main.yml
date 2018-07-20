@@ -1,0 +1,53 @@
+- name: setting docker repository using distribution release 'Ubuntu Xenial'
+  set_fact:
+    apt_docker_repository: https://download.docker.com/linux/ubuntu xenial stable
+  when: ansible_distribution_release|string in item
+  with_items:
+    - 'xenial'
+
+- name: installing packages to allow apt to use a repository over HTTPS
+  apt: 
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+
+- name: uninstalling old versions
+  apt: name={{ item }} state=absent
+  with_items:
+    - docker
+    - docker-engine
+
+- name: adding docker official GPG key
+  get_url:
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    dest: '/tmp/gpg'
+
+- name: adding docker official GPG key
+  shell: apt-key add /tmp/gpg
+  become: yes
+
+- name: adding docker stable repository
+  apt_repository:
+    repo: deb [arch=amd64] {{ apt_docker_repository }}
+    state: present
+
+- name: instaling docker-ce (docker communit edition)
+  apt: 
+    name: docker-ce
+    state: latest
+    update_cache: yes
+
+- name: adding users to docker group
+  shell: usermod -aG docker {{item}}
+  with_items: "{{ docker_users }}"
+
+- name: restarting docker daemon service
+  service:
+    name: docker
+    state: restarted
+  when: not ci_env

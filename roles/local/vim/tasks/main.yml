@@ -1,0 +1,11 @@
+- name: installing vim
+  apt: 
+    name: vim
+    state: latest
+    update_cache: yes
+
+- name: updating alternatives vim
+  alternatives:
+    name: editor
+    path: /usr/bin/vim.basic
+    link: /usr/bin/vim

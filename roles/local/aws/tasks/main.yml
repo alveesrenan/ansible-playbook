@@ -1,0 +1,16 @@
+- name: installing python pip
+  apt: 
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  become: yes
+  with_items:
+    - python-pip
+
+- name: upgrading pip version
+  shell: pip install --upgrade pip
+  become: yes
+
+- name: installing aws cli
+  shell: pip install awscli --upgrade --user
+  become: yes

@@ -1,0 +1,10 @@
+- name: downloading minikube and granting necessary permissions.
+  get_url:
+    url: 'https://storage.googleapis.com/minikube/releases/v0.28.1/minikube-linux-amd64'
+    dest: '/tmp/minikube'
+    mode: +x
+  become: yes
+
+- name: moving minikube agent to local bin folder which will be used to all system users.
+  shell: mv /tmp/minikube /usr/local/bin
+  become: yes

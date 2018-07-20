@@ -1,0 +1,44 @@
+- name: Create /usr/lib/jvm directory
+  file: 
+    path: /usr/lib/jvm
+    state: directory
+    owner: root
+    group: root
+    recurse: yes
+
+- name: Unzip Java 8
+  unarchive:
+    src: ../files/{{ java_8_install_file }}
+    dest: /usr/lib/jvm/
+
+- name: Rename Java 8 folder
+  shell: mv /usr/lib/jvm/{{ java_8_installed_folder }} /usr/lib/jvm/java-8-oracle
+
+- name: Changing owner Java 8 folder
+  file:
+    path: /usr/lib/jvm/java-8-oracle
+    owner: root
+    group: root
+
+- name: Update alternatives Java
+  alternatives:
+    name: java
+    path: /usr/lib/jvm/java-8-oracle/bin/java
+    link: /usr/bin/java
+
+- name: Update alternatives Javac
+  alternatives:
+    name: javac
+    path: /usr/lib/jvm/java-8-oracle/bin/javac
+    link: /usr/bin/javac
+
+- name: Update alternatives Jcontrol
+  alternatives:
+    name: jcontrol
+    path: /usr/lib/jvm/java-8-oracle/bin/jcontrol
+    link: /usr/bin/jcontrol
+
+- name: Removing Java 8 installer file
+  file: 
+    path: /usr/lib/jvm/{{ java_8_install_file }}
+    state: absent

@@ -1,0 +1,29 @@
+- src: vcabourdin.terminator
+  name: terminator
+  
+- src: gantsign.oh-my-zsh
+  name: oh-my-zsh
+
+- src: gantsign.maven
+  name: maven
+  
+- src: gantsign.maven-color
+  name: maven-color
+
+- src: telusdigital.nodejs
+  name: nodejs
+
+- src: wtanaka.chrome
+  name: google-chrome
+
+- src: gantsign.visual-studio-code
+  name: visual-studio-code
+
+- src: jdauphant.sublimetext
+  name: sublime-text
+
+- src: gantsign.intellij
+  name: intellij
+
+- src: FGtatsuro.virtualbox
+  name: virtualbox
